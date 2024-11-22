@@ -4,43 +4,40 @@
  */
 
 package Controlador;
+
 import Bd.Conexion;
 import Modelo.Prestamo;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
+
 
 
 public class PrestamoControlador {
-
-    public boolean registrarPrestamo(Prestamo prestamo) {
-        String sql = "INSERT INTO prestamos (id_usuario, id_libro, fecha_prestamo, fecha_devolucion) VALUES (?, ?, ?, ?)";
-
-        // Obtén la conexión de la clase Conexion
-        Conexion conexionBd = new Conexion();
-        try (Connection conn = conexionBd.obtenerConexion();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            // Configura los parámetros del PreparedStatement
-            stmt.setInt(1, prestamo.getIdUsuario());
-            stmt.setInt(2, prestamo.getIdLibro());
-            stmt.setDate(3, new Date(prestamo.getFechaPrestamo().getTime()));
-            stmt.setDate(4, new Date(prestamo.getFechaDevolucion().getTime()));
-
-            // Ejecuta la consulta
+    
+    public boolean agregar(Prestamo pre){
+        try {
+            Conexion con = new Conexion();
+            Connection cnx = con.obtenerConexion();
+            String query ="insert into prestamos(id,id_usuario,id_libro,fecha_prestamo,fecha_devolucion) VALUES (?,?,?,?,?);";
+            PreparedStatement stmt= cnx.prepareStatement(query);
+            stmt.setInt(1,pre.getId());
+            stmt.setInt(2,pre.getIdLibro());
+            stmt.setInt(3,pre.getIdUsuario());
+            stmt.setDate(4, (Date) pre.getFechaPrestamo());
+            stmt.setDate(5, (Date) pre.getFechaDevolucion());
+            
             stmt.executeUpdate();
+            stmt.close();
+            cnx.close();
+            
             return true;
         } catch (SQLException e) {
-            // Manejo de errores
-            JOptionPane.showMessageDialog(null, "Error al registrar préstamo: " + e.getMessage());
+            System.out.println("Error al insertar datos"+ e.getMessage());
             return false;
         }
     }
-
-    public boolean devolverPrestamo(int idUsuario, int idLibroInt) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 }
  

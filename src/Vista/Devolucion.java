@@ -153,31 +153,7 @@ public class Devolucion extends javax.swing.JPanel {
     }//GEN-LAST:event_librotxtActionPerformed
 
     private void devolverbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_devolverbtnActionPerformed
-        String folioUsuario = foliotxt.getText();
-        String idLibro = librotxt.getText();
-
-        if (folioUsuario.isEmpty() || idLibro.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-    }
-
-        try {
-            int idUsuario = Integer.parseInt(folioUsuario);
-            int idLibroInt = Integer.parseInt(idLibro);
-
-        
-        PrestamoControlador controlador = new PrestamoControlador();
-        boolean resultado = controlador.devolverPrestamo(idUsuario, idLibroInt);
-
-        // Mostrar el resultado de la operación
-        if (resultado) {
-            JOptionPane.showMessageDialog(this, "Préstamo devuelto exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(this, "Error al devolver el préstamo.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Los campos de usuario y libro deben ser numéricos.", "Error", JOptionPane.ERROR_MESSAGE);
-    }
+  
     }//GEN-LAST:event_devolverbtnActionPerformed
 
     private void foliotxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foliotxtActionPerformed

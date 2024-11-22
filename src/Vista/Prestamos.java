@@ -178,7 +178,7 @@ public class Prestamos extends javax.swing.JPanel {
             prestamo.setFechaDevolucion(java.sql.Date.valueOf(LocalDate.now().plusDays(15)));
 
             PrestamoControlador controlador = new PrestamoControlador();
-            boolean resultado = controlador.registrarPrestamo(prestamo);
+            boolean resultado = controlador.agregar(prestamo);
 
             if (resultado) {
             JOptionPane.showMessageDialog(this, "Préstamo registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
